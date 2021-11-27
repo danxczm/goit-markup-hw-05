@@ -11,6 +11,7 @@
 	--footer-bg-icon: rgba(255, 255, 255, 0.1);
 	--card-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.2);
 	--hover-shadow: 0px 3px 1px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.08), 0px 2px 2px rgba(0, 0, 0, 0.12);
+	--backdrop-bg: rgba(0, 0, 0, 0.2);
 }
 
 /* ----------------UTILITIES---------------- */
@@ -340,6 +341,15 @@ img {
 	background-color: #188ce8;
 }
 
+.hero-backdrop {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: var(--backdrop-bg);
+}
+
 /* ----------------ADVANTAGES---------------- */
 
 .advantages-section {
@@ -390,16 +400,15 @@ img {
 /* ----------------WHAT CAN WE MAKE---------------- */
 
 .we-make-list {
-	margin-left: -30px;
-	margin-top: -30px;
 	display: flex;
 }
 
 .we-make-item {
 	position: relative;
-	flex-basis: calc(100% / 3 - 30px);
-	margin-left: 30px;
-	margin-top: 30px;
+}
+
+.we-make-item:not(:last-child) {
+	margin-right: 30px;
 }
 
 .we-make-title {
