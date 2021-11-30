@@ -12,6 +12,8 @@
 	--card-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.2);
 	--hover-shadow: 0px 3px 1px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.08), 0px 2px 2px rgba(0, 0, 0, 0.12);
 	--backdrop-bg: rgba(0, 0, 0, 0.2);
+	--projects-bg-hover: rgba(33, 150, 243, 0.9);
+	--cubic-value: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* ----------------UTILITIES---------------- */
@@ -129,7 +131,9 @@ img {
 }
 
 .site-nav-link {
+	position: relative;
 	display: block;
+
 	padding-top: 32px;
 	padding-bottom: 32px;
 
@@ -138,6 +142,29 @@ img {
 	font-size: 14px;
 	line-height: 1.14;
 	letter-spacing: 0.02em;
+
+	transition: color 250ms var(--cubic-value);
+}
+
+.site-nav-link::after {
+	position: absolute;
+	display: block;
+	bottom: -1px;
+
+	content: "";
+	width: 100%;
+	height: 4px;
+	background-color: var(--accent-color);
+	border-radius: 2px;
+
+	transform: scaleX(0);
+	transition: transform 250ms var(--cubic-value);
+	transform-origin: left center;
+}
+
+.site-nav-link:hover::after,
+.site-nav-link:focus::after {
+	transform: scaleX(1);
 }
 
 .site-nav-link.current,
@@ -150,11 +177,11 @@ img {
 	position: relative;
 }
 
-.current::after {
+.current::before {
 	position: absolute;
 	display: block;
+	bottom: -1px;
 
-	margin-top: 29px;
 	content: "";
 	width: 100%;
 	height: 4px;
@@ -178,6 +205,8 @@ img {
 	font-size: 14px;
 	line-height: 1.14;
 	letter-spacing: 0.02em;
+
+	transition: color 250ms var(--cubic-value);
 }
 
 .contacts-list {
@@ -269,14 +298,18 @@ img {
 }
 
 .footer-socials-link {
-	width: 100%;
-	height: 100%;
-	border-radius: 50%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+
 	background-color: var(--footer-bg-icon);
 	color: white;
+
+	transition: background-color 250ms var(--cubic-value);
 }
 
 .footer-socials-icon {
@@ -292,12 +325,13 @@ img {
 
 /* ----------------HERO SECTION---------------- */
 .hero-section {
+	text-align: center;
+
 	padding: 200px 0;
 	margin-left: auto;
 	margin-right: auto;
 	max-width: 1600px;
 
-	text-align: center;
 	background-color: #c4c4c4;
 	background-image: linear-gradient(rgba(47, 48, 58, 0.4), rgba(47, 48, 58, 0.4)), url(../images/hero-img.jpg);
 	background-repeat: no-repeat;
@@ -334,6 +368,8 @@ img {
 	font-weight: 700;
 	line-height: 1.8;
 	letter-spacing: 0.06em;
+
+	transition: background-color 250ms var(--cubic-value);
 }
 
 .hero-button:hover,
@@ -343,11 +379,58 @@ img {
 
 .hero-backdrop {
 	position: fixed;
+	z-index: 1;
+
 	top: 0;
 	left: 0;
 	width: 100%;
 	height: 100%;
 	background-color: var(--backdrop-bg);
+	transition: opacity 800ms, visibility 800ms;
+}
+
+.hero-modal {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+
+	width: 528px;
+	height: 581px;
+
+	background-color: var(--wite-bg-color);
+	box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.2);
+	border-radius: 4px;
+
+	transform: scale(1) translate(-50%, -50%);
+}
+
+.hero-modal-button {
+	position: absolute;
+	top: 7px;
+	right: 7px;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	width: 30px;
+	height: 30px;
+
+	border-radius: 50%;
+	background-color: transparent;
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	cursor: pointer;
+	color: var(--accent-color);
+}
+
+.hero-modal-button:hover {
+	fill: currentColor;
+}
+
+.is-hidden {
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
 }
 
 /* ----------------ADVANTAGES---------------- */
@@ -523,6 +606,8 @@ img {
 	justify-content: center;
 	background-color: var(--wite-bg-color);
 	color: var(--icons-color);
+
+	transition: color 250ms var(--cubic-value), background-color 250ms var(--cubic-value);
 }
 
 .team-social-icon {
@@ -566,6 +651,8 @@ img {
 	border: 1px solid var(--icons-color);
 	border-radius: 4px;
 	color: var(--icons-color);
+
+	transition: color 250ms var(--cubic-value), border-color 250ms var(--cubic-value);
 }
 
 .clients-icon {
@@ -602,6 +689,9 @@ img {
 	border: none;
 	border-radius: 4px;
 	cursor: pointer;
+
+	transition: color 250ms var(--cubic-value), background-color 250ms var(--cubic-value),
+		box-shadow 250ms var(--cubic-value);
 }
 
 .filter-nav-buttons:hover,
@@ -614,10 +704,11 @@ img {
 /* ----------------PROJECTS---------------- */
 
 .projects-list {
-	margin-left: -30px;
-	margin-top: -30px;
 	display: flex;
 	flex-wrap: wrap;
+
+	margin-left: -30px;
+	margin-top: -30px;
 }
 
 .projects-item {
@@ -628,6 +719,7 @@ img {
 
 .projects-link {
 	display: block;
+	transition: box-shadow 250ms var(--cubic-value);
 }
 
 .projects-link:hover,
@@ -656,4 +748,31 @@ img {
 	font-size: 16px;
 	line-height: 1.87;
 	letter-spacing: 0.03em;
+}
+
+.projects-top-wrap {
+	position: relative;
+	overflow: hidden;
+}
+
+.projects-top-text {
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	height: 100%;
+	font-size: 18px;
+	line-height: 1.5;
+	letter-spacing: 0.03em;
+	padding: 63px 24px;
+	color: var(--white-text-color);
+	background-color: var(--projects-bg-hover);
+
+	transform: translateY(100%);
+	transition: transform 600ms;
+}
+
+.projects-item:hover .projects-top-text,
+.projects-link:focus .projects-top-text {
+	transform: translateY(0);
 }
