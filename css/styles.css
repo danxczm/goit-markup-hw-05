@@ -386,7 +386,7 @@ img {
 	width: 100%;
 	height: 100%;
 	background-color: var(--backdrop-bg);
-	transition: opacity 800ms, visibility 800ms;
+	transition: opacity 800ms var(--cubic-value), visibility 800ms var(--cubic-value);
 }
 
 .hero-modal {
@@ -769,7 +769,7 @@ img {
 	background-color: var(--projects-bg-hover);
 
 	transform: translateY(100%);
-	transition: transform 600ms;
+	transition: transform 250ms var(--cubic-value);
 }
 
 .projects-item:hover .projects-top-text,
